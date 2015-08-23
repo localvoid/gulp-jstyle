@@ -1,9 +1,9 @@
 'use strict';
 
 var path = require('path');
+var child = require('child_process');
 var gutil = require('gulp-util');
 var through = require('through2');
-var spawn = require('win-spawn');
 var File = require('vinyl');
 
 module.exports = function(options) {
@@ -30,7 +30,7 @@ module.exports = function(options) {
     }
     args.push('--file');
     args.push(file.path);
-    var proc = spawn(executable, args);
+    var proc = child.spawn(executable, args);
 
     proc.stdout.setEncoding('utf8');
     proc.stderr.setEncoding('utf8');
