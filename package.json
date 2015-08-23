@@ -1,19 +1,20 @@
 {
   "name": "gulp-jstyle",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "gulp plugin for jstyle",
-  "license": "BSD",
+  "license": "MIT",
   "author": {
     "name": "Boris Kaul",
     "email": "localvoid@gmail.com",
     "url": "https://github.com/localvoid"
   },
   "keywords": [
+    "gulpplugin",
+    "gulp",
+    "jstyle",
     "css",
     "js",
-    "jstyle",
-    "browser",
-    "gulp"
+    "browser"
   ],
   "homepage": "https://github.com/localvoid/gulp-jstyle",
   "repository": {
