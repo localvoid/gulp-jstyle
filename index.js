@@ -63,23 +63,23 @@ module.exports = function(options) {
             contents: new Buffer(entry.css)
           }));
         }
+        var mapString = JSON.stringify(data.map, null, 2);
         if (minifyClassNames) {
-          var mapString = JSON.stringify(data.map, null, 2);
           this.push(new File({
             cwd: file.cwd,
             base: file.base,
             path: path.join(dirPath, fileName + '_map.json'),
             contents: new Buffer(mapString)
           }));
-          if (closureMap) {
-            this.push(new File({
-              cwd: file.cwd,
-              base: file.base,
-              path: path.join(dirPath, fileName + '_map.js'),
-              contents: new Buffer('goog.provide(\'' + closureMapPrefix + '.'+ fileName + '\');\n\n' +
-                  'goog.setCssNameMapping(' + mapString + ', \'BY_WHOLE\');\n')
-            }));
-          }
+        }
+        if (closureMap) {
+          this.push(new File({
+            cwd: file.cwd,
+            base: file.base,
+            path: path.join(dirPath, fileName + '_map.js'),
+            contents: new Buffer('goog.provide(\'' + closureMapPrefix + '.'+ fileName + '\');\n\n' +
+                                 'goog.setCssNameMapping(' + mapString + ', \'BY_WHOLE\');\n')
+          }));
         }
       } else {
         this.emit('error', new gutil.PluginError('gulp-jstyle', 'gulp-jstyle failed: ' + error, {
