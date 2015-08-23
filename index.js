@@ -35,14 +35,14 @@ module.exports = function(options) {
     proc.stdout.setEncoding('utf8');
     proc.stderr.setEncoding('utf8');
 
-    var result = '';
-    var error = '';
+    var result = [];
+    var error = [];
 
     var dirPath = path.dirname(file.path);
     var fileName = path.basename(file.path, '.js');
 
-    proc.stdout.on('data', function(data) { result += data; });
-    proc.stderr.on('data', function(data) { error += data; });
+    proc.stdout.on('data', function(data) { result.push(data); });
+    proc.stderr.on('data', function(data) { error.push(data); });
 
     proc.on('error', function(err) {
       this.emit('error', new gutil.PluginError('gulp-jstyle', err, {
@@ -53,7 +53,7 @@ module.exports = function(options) {
 
     proc.on('close', function(code) {
       if (code === 0) {
-        var data = JSON.parse(result);
+        var data = JSON.parse(result.join(''));
         for (var i = 0; i < data.entries.length; i++) {
           var entry = data.entries[i];
           this.push(new File({
